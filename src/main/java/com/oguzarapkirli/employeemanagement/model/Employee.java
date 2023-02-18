@@ -5,12 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Document
 @Data
@@ -19,7 +20,7 @@ import java.util.Date;
 @Builder
 public class Employee {
     @Id
-    private ObjectId id;
+    private String id = UUID.randomUUID().toString();
 
     @NotBlank(message = "Name is mandatory")
     @Size(min = 2, max = 20, message = "Name must be between 2 and 20 characters")
@@ -36,6 +37,7 @@ public class Employee {
 
     @Past(message = "Birth date must be in the past")
     @NotNull(message = "Birth date is necessary")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
     @Pattern(regexp = "^[1-9]{1}[0-9]{9}[02468]{1}$", message = "Identity number must be 11 digits")

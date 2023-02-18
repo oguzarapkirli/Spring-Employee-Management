@@ -10,9 +10,9 @@ public interface EmployeeService {
 
     Employee getEmployeeById(String id);
 
-    Employee addEmployee(Employee employee);
+    void addEmployee(Employee employee);
 
-    Employee updateEmployee(Employee employee);
+    void updateEmployee(Employee employee);
 
     void deleteEmployee(String id);
 

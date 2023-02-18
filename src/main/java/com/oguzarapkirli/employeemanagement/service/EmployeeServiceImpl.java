@@ -23,21 +23,25 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (!employeeRepository.existsById(id)) {
             throw new IllegalStateException("There is no employee with this id in the database");
         }
-        return employeeRepository.findById(id).get();
+        var optional = employeeRepository.findById(id).isPresent() ;
+        if (optional) {
+            return employeeRepository.findById(id).get();
+        }
+        return null;
     }
 
-    public Employee addEmployee(Employee employee) {
-        if (employeeRepository.existsById(employee.getId().toString())) {
+    public void addEmployee(Employee employee) {
+        if (employeeRepository.existsById(employee.getId())) {
             throw new IllegalStateException("There is already an employee with this id in the database");
         }
-        return employeeRepository.save(employee);
+        employeeRepository.save(employee);
     }
 
-    public Employee updateEmployee(Employee employee) {
-        if (!employeeRepository.existsById(employee.getId().toString())) {
+    public void updateEmployee(Employee employee) {
+        if (!employeeRepository.existsById(employee.getId())) {
             throw new IllegalStateException("There is no employee with this id in the database");
         }
-        return employeeRepository.save(employee);
+        employeeRepository.save(employee);
     }
 
     public void deleteEmployee(String id) {
