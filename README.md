@@ -17,9 +17,10 @@ CRUD Employee Management system with server side rendering using thymeleaf
 
   
 ## Pics
+![Screenshot](./pics/3.png)
 ![Screenshot](./pics/1.png)
 ![Screenshot](./pics/2.png)
-![Screenshot](./pics/3.png)
+
 
 
   
