@@ -49,8 +49,10 @@ public class EmployeeController {
 
     @GetMapping("/update/{id}")
     public String getUpdatePage(Model model, @PathVariable String id) {
-        var employee = employeeService.getEmployeeById(id);
-        model.addAttribute("employee", employee);
+        if (!employeeService.getEmployeeById(id).getId().equals(id)) {
+            return redirectToIndex;
+        }
+        model.addAttribute("employee", employeeService.getEmployeeById(id));
         return "update-user";
     }
 
@@ -65,6 +67,9 @@ public class EmployeeController {
 
     @GetMapping("/delete/{id}")
     public String deleteEmployee(@PathVariable String id) {
+        if (!employeeService.getEmployeeById(id).getId().equals(id)) {
+            return redirectToIndex;
+        }
         employeeService.deleteEmployee(id);
         return redirectToIndex;
     }
